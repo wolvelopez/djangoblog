@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block titulo %} Lista de entradas de Django {% endblock %}
+
+{% block contenido %}
+	{% for entrada in entradas %}
+		<p>
+			<h2>{{entrada.titulo}}</h2>
+			{{entrada.texto}}
+			Fecha: {{entrada.fecha}}
+			Etiquetas:{{entrada.etiquetas}}
+		</p>
+        <h4>Comentarios</h4>
+        {% for comentario in entrada.comentario_set.all %}
+            <p>{{ comentario.comentario_texto}}</p>
+	    {% endfor %}
+        <form action="/entradas/" method="post">
+        {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit" />
+        </form>
+	{% endfor%}
+{% endblock %}
