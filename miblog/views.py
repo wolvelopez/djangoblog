@@ -4,6 +4,8 @@ from miblog.models import Entrada, Comentario
 from miblog.forms import FormComentario
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, logout
+from django.http import HttpResponseRedirect
 
 def index(request):
     return HttpResponse('Bienvenido al blog :)')
@@ -19,33 +21,19 @@ def mostrar_entradas(request):
         comentario.usuario = User.objects.get(username='wolvelopez')
         comentario.entrada = Entrada.objects.get(pk=1)
         comentario.save()
-        form = FormComentario(request.post)
-        # if form.is_valid():
-        #     print('Se guardó el comentario')
-        #     form.save()
+        #obtencion del usuario autenticado
+        if request.user.is_authenticated():
+            usuario = User
+        else:
+            return HttpResponseRedirect('/accounts/login/')
     else:
         print("entra qui")
-        form = FormComentario
-    return render(request, 'entradas.html', {'entradas': entradas , 'form': form})
+        #form = FormComentario
+        usuario = None
+    return render(request, 'entradas.html', 
+        {'entradas': entradas , 'usuario': usuario})
 
-
-def comentarios(request):
-    if request.method == 'POST':
-        comentario = Comentario()
-        comentario.comentario_texto = request.POST['comentario_texto']
-        comentario.comentario_fecha = timezone.now()
-        comentario.usuario = 'wolvelopez'
-        comentario.entrada = 1
-        comentario.save()
-        #form = FormComentario(request.post)
-        # if form.is_valid():
-        #     print('Se guardó el comentario')
-        #     form.save()
-    else:
-        print("entra else")
-        form = FormComentario()
-    return render(request, 'prueba.html', {'form': form})    
-
-
-
-
+def logout_view(request):
+    logout(request)
+    print("llega acá????")
+    return HttpResponseRedirect('/entradas/')    
