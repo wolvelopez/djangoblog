@@ -1,13 +1,15 @@
 {% extends 'index.html' %}
 {% block titulo %} Lista de entradas de Django {% endblock %}
 
+
 {% block contenido %}
+<p><a href="/logout/">Salir</a></p>
 	{% for entrada in entradas %}
 		<p>
 			<h2>{{entrada.titulo}}</h2>
-			{{entrada.texto}}
-			Fecha: {{entrada.fecha}}
-			Etiquetas:{{entrada.etiquetas}}
+			<p>{{entrada.texto}}</p>
+			<p>Fecha: {{entrada.fecha}}</p>
+			<p>Etiquetas:{{entrada.etiquetas}}</p>
 		</p>
         <h4>Comentarios</h4>
         {% for comentario in entrada.comentario_set.all %}
@@ -15,8 +17,10 @@
 	    {% endfor %}
         <form action="/entradas/" method="post">
         {% csrf_token %}
-            {{ form }}
+            <input type="text" name="comentario_texto">
             <input type="submit" value="Submit" />
         </form>
+        <p>El usuario debe estar autenticado para poder comentar.</p>
+        <p>el usuario actual es: {{ usuario.username }}</p>
 	{% endfor%}
 {% endblock %}
