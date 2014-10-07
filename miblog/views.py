@@ -14,14 +14,12 @@ def index(request):
 #@login_required
 def mostrar_entradas(request):
     entradas = Entrada.objects.all()    
-    if request.method == 'POST':
-        entrada_pk = request.POST['comentario_texto.id']
-        print("Entrada_PK: %s" % entrada_pk)
+    if request.method == 'POST':        
         comentario = Comentario()
         comentario.comentario_texto = request.POST['comentario_texto']
         comentario.comentario_fecha = timezone.now()
         comentario.usuario = User.objects.get(username='wolvelopez')
-        comentario.entrada = Entrada.objects.get(pk=1)
+        comentario.entrada = Entrada.objects.get(pk=request.POST['id'])
         comentario.save()
         #obtencion del usuario autenticado
         if request.user.is_authenticated():
@@ -32,6 +30,10 @@ def mostrar_entradas(request):
         print("entra qui")
         #form = FormComentario
         usuario = None
+    if request.user.is_authenticated:
+        usuario = 1
+    else:
+        usuario = 0
     return render(request, 'entradas.html', 
         {'entradas': entradas , 'usuario': usuario})
 

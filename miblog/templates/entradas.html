@@ -1,4 +1,5 @@
 {% extends 'index.html' %}
+
 {% block titulo %} Lista de entradas de Django {% endblock %}
 
 
@@ -17,10 +18,15 @@
 	    {% endfor %}
         <form action="/entradas/" method="post">
         {% csrf_token %}
-            <input type="text" name="comentario_texto" id={{ entrada.id }}>
+            <input type="text" name="comentario_texto" >
+            <input type="hidden" name="id" value={{entrada.id}}>
             <input type="submit" value="Submit" />
         </form>
-        <p>El usuario debe estar autenticado para poder comentar.</p>
-        <p>el usuario actual es: {{ usuario.username }}</p>
+        {% if usuario == 1 %}
+            <p>El usuario debe estar autenticado para poder comentar.</p>
+            {% block authentication %}{% endblock %}
+        {% else %}
+            <p>el usuario actual es: {{ user.username }}</p>
+        {% endif %}
 	{% endfor%}
 {% endblock %}
