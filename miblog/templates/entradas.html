@@ -17,7 +17,7 @@
 	    {% endfor %}
         <form action="/entradas/" method="post">
         {% csrf_token %}
-            <input type="text" name="comentario_texto">
+            <input type="text" name="comentario_texto" id={{ entrada.id }}>
             <input type="submit" value="Submit" />
         </form>
         <p>El usuario debe estar autenticado para poder comentar.</p>

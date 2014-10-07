@@ -15,6 +15,8 @@ def index(request):
 def mostrar_entradas(request):
     entradas = Entrada.objects.all()    
     if request.method == 'POST':
+        entrada_pk = request.POST['comentario_texto.id']
+        print("Entrada_PK: %s" % entrada_pk)
         comentario = Comentario()
         comentario.comentario_texto = request.POST['comentario_texto']
         comentario.comentario_fecha = timezone.now()
