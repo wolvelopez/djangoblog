@@ -7,7 +7,7 @@
 <p><a href="/logout/">Salir</a></p>
 	{% for entrada in entradas %}
 		<p>
-			<h2>{{entrada.titulo}}</h2>
+			<h2><a href="/entradas/{{entrada.id}}">{{ entrada.titulo }}</a></a></h2>
 			<p>{{entrada.texto}}</p>
 			<p>Fecha: {{entrada.fecha}}</p>
 			<p>Etiquetas:{{entrada.etiquetas}}</p>

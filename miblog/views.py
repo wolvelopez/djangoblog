@@ -37,6 +37,10 @@ def mostrar_entradas(request):
     return render(request, 'entradas.html', 
         {'entradas': entradas , 'usuario': usuario})
 
+def entrada(entrada_id):
+    entradaSel = Entrada.object.get(pk=entrada_id)
+    return render(request, 'entrada.html', {'entradasel':entradaSel})
+
 def logout_view(request):
     logout(request)
     print("llega acá????")
