@@ -1,9 +1,13 @@
 {% extends 'index.html' %}
-
-<p>{{ entradaSel.titulo }}</a></a></h2>
-<p>{{entradaSel.texto}}</p>
-<p>Fecha: {{entradaSel.fecha}}</p>
-<p>Etiquetas:{{entradaSel.etiquetas}}</p>
+<p>Entrada:</p>
+{% block contenido %}
+	{# {% for entrada in entradaSel %} #}
+		<p>{{ entradaSel.titulo }}</a></a></h2>
+		<p>{{ entradaSel.texto }}</p>
+		<p>Fecha: {{ entradaSel.fecha }}</p>
+		<p>Etiquetas:{{ entradaSel.etiquetas }}</p>
+	{# {% endfor %} #}
+{% endblock %}
 
 {# <h4>Comentarios</h4>
 {% for comentario in entrada.comentario_set.all %}

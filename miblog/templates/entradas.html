@@ -1,8 +1,6 @@
 {% extends 'index.html' %}
 
 {% block titulo %} Lista de entradas de Django {% endblock %}
-
-
 {% block contenido %}
 <p><a href="/logout/">Salir</a></p>
 	{% for entrada in entradas %}

@@ -26,9 +26,7 @@ def mostrar_entradas(request):
             usuario = User
         else:
             return HttpResponseRedirect('/accounts/login/')
-    else:
-        print("entra qui")
-        #form = FormComentario
+    else:        
         usuario = None
     if request.user.is_authenticated:
         usuario = 1
@@ -37,9 +35,13 @@ def mostrar_entradas(request):
     return render(request, 'entradas.html', 
         {'entradas': entradas , 'usuario': usuario})
 
-def entrada(entrada_id):
-    entradaSel = Entrada.object.get(pk=entrada_id)
-    return render(request, 'entrada.html', {'entradasel':entradaSel})
+
+def entrada(request,entrada_id):    
+    entradaSel = Entrada.objects.get(id=entrada_id)
+    print("entradaSel: %s" % entradaSel.titulo)
+    return render(request, 'entrada.html', 
+        {'entradaSel': entradaSel})
+
 
 def logout_view(request):
     logout(request)
