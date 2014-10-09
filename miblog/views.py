@@ -38,9 +38,11 @@ def mostrar_entradas(request):
 
 def entrada(request,entrada_id):    
     entradaSel = Entrada.objects.get(id=entrada_id)
-    print("entradaSel: %s" % entradaSel.titulo)
+    comentarioSel = Comentario.objects.filter(entrada_id=entradaSel.id)
+    print("entradaSel: %s" % entradaSel.id)
+    print(comentarioSel)
     return render(request, 'entrada.html', 
-        {'entradaSel': entradaSel})
+        {'entradaSel': entradaSel , 'comentarioSel': comentarioSel})
 
 
 def logout_view(request):
