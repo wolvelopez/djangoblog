@@ -7,9 +7,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout
 from django.http import HttpResponseRedirect
 
-def index(request):
-    return HttpResponse('Bienvenido al blog :)')
-
+def index(request):    
+        if request.user.is_authenticated():
+            usuario = User            
+        else:
+            return HttpResponseRedirect('/accounts/login/')
+        return render(request, 'index.html', {'usuario': usuario})
 
 #@login_required
 def mostrar_entradas(request):

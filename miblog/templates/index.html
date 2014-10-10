@@ -13,6 +13,18 @@
 	<title>{% block titulo %}{% endblock%}</title>
 </head>
 <body>
+	{% block login %}
+	<p>Login<P>
+		{% if acceso == 1 %}
+		    <p>Usuario: {{ usuario.userrname }}
+		{% else %}
+			<form action="/entradas/login" >
+				Username: <input type="text" name="username">
+				Password: <input type="text" name="password">
+				<input type="button" value="Login">
+			</form>
+		{% endif %}
+	{% endblock %}
 	{% block authentication %}{% endblock %}
 	{% block contenido %}{% endblock %}
 </body>
