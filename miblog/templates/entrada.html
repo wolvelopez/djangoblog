@@ -13,17 +13,17 @@
     {% for comentario in comentarioSel %}
         <p>{{ comentario.comentario_texto}}</p>
     {% endfor %}
-    <form action="/entradas/" method="post">
+    <form action="/entradas/{{entradaSel.id}}" method="post">
     {% csrf_token %}
         <input type="text" name="comentario_texto" >
-        <input type="hidden" name="id" value={{entrada.id}}>
+        <input type="hidden" name="id" value={{entradaSel.id}}>
         <input type="submit" value="Submit" />
     </form>
     {% if usuario == 1 %}
         <p>El usuario debe estar autenticado para poder comentar.</p>
         {% block authentication %}{% endblock %}
     {% else %}
-        <p>el usuario actual es: {{ user.username }}</p>
+        <p>Conectado como: {{ user.username }}</p>
     {% endif %}
 
 {% endblock %}

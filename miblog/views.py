@@ -13,7 +13,12 @@ def index(request):
 
 #@login_required
 def mostrar_entradas(request):
-    entradas = Entrada.objects.all()    
+    entradas = Entrada.objects.all()        
+    return render(request, 'entradas.html', 
+        {'entradas': entradas})
+
+
+def entrada(request,entrada_id):
     if request.method == 'POST':        
         comentario = Comentario()
         comentario.comentario_texto = request.POST['comentario_texto']
@@ -31,12 +36,8 @@ def mostrar_entradas(request):
     if request.user.is_authenticated:
         usuario = 1
     else:
-        usuario = 0
-    return render(request, 'entradas.html', 
-        {'entradas': entradas , 'usuario': usuario})
-
-
-def entrada(request,entrada_id):    
+        usuario = 0    
+    
     entradaSel = Entrada.objects.get(id=entrada_id)
     comentarioSel = Comentario.objects.filter(entrada_id=entradaSel.id)
     print("entradaSel: %s" % entradaSel.id)
