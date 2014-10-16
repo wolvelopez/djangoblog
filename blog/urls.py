@@ -5,6 +5,7 @@ from miblog.views import *
 
 urlpatterns = patterns('',
 	url(r'^$', index),
+	url(r'^summernote/', include('django_summernote.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^entradas/', include('miblog.urls')),
     url(r'^accounts/login/', 'django.contrib.auth.views.login'),

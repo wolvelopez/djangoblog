@@ -1,9 +1,12 @@
 {% extends 'index.html' %}
 <p>Entrada:</p>
 {% block contenido %}
+</br >
+</br >
+</br >
 	{# {% for entrada in entradaSel %} #}
 		<p>{{ entradaSel.titulo }}</a></a></h2>
-		<p>{{ entradaSel.texto }}</p>
+		<p>{{ entradaSel.texto|safe }}</p>
 		<p>Fecha: {{ entradaSel.fecha }}</p>
 		<p>Etiquetas:{{ entradaSel.etiquetas }}</p>
 	{# {% endfor %} #}
